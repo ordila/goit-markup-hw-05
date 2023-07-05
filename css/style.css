@@ -75,11 +75,36 @@ body {
   color: var(--navyblue);
   padding: 24px 0;
   display: block;
+  position: relative;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
 }
-.navigation_item:hover {
-  color: var(--ocean);
+
+.navigation_item:focus::after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--ocean);
 }
 .navigation_item:focus {
+  color: var(--ocean);
+}
+.navigation_item_list:hover ::after {
+  content: "";
+  color: var(--ocean);
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--ocean);
+}
+.navigation_item:hover {
   color: var(--ocean);
 }
 
@@ -119,6 +144,7 @@ body {
   line-height: 1.5;
   padding: 24px 0;
   display: block;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .adress_item:hover {
   color: var(--ocean);
@@ -142,6 +168,7 @@ body {
 }
 .social_footer .social_list_footer {
   gap: 16px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social_item_footer:hover .social_link_footer {
@@ -201,7 +228,7 @@ MAIN PAGE START
   margin: 0 auto;
   padding: 16px 32px;
   border-radius: 4px;
-
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 48px;
 }
 .btn_ord:hover {
@@ -373,6 +400,7 @@ MAIN PAGE START
   background: #4d5ae5;
   justify-content: center;
   align-items: center;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social_link:hover {
   background-color: #404bbf;
@@ -418,6 +446,8 @@ MAIN PAGE START
   justify-content: center;
   align-items: center;
   color: #8e8f99;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers_link:hover {
@@ -455,6 +485,7 @@ MAIN PAGE START
   display: block;
   padding: 12px 24px;
   border-radius: 4px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button_filtr:hover {
   background-color: var(--ocean);
@@ -492,6 +523,7 @@ MAIN PAGE START
 }
 .portfolio_card {
   display: block;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .portfolio_card:hover {
   box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08),
@@ -534,3 +566,75 @@ MAIN PAGE START
   border-top: none;
 }
 /* SECOND MAIN PAGE END*/
+/* OVERLAY*/
+.photo_overlay {
+  position: relative;
+  overflow: hidden;
+}
+.text_overlay {
+  position: absolute;
+  height: 100%;
+  background-color: var(--iris);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.32px;
+  color: #f4f4fd;
+  padding: 40px 32px 0;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.photo_overlay:hover .text_overlay,
+.photo_overlay:focus .text_overlay {
+  transform: translateY(0%);
+}
+
+/*BACKDROP */
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(46, 47, 66, 0.4);
+  transform: translateX(0);
+}
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+}
+.modal {
+  width: 408px;
+  height: 584px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(252, 252, 252, 1);
+  border-radius: 4px;
+  opacity: 1;
+  transition: transform 500ms, opacity 500ms;
+}
+.backdrop.is-hidden .modal {
+  transform: scale(0.2);
+  opacity: 0;
+}
+.close_btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(231, 233, 252, 1);
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+}
+.icon_close {
+  width: 8px;
+  height: 8px;
+}
